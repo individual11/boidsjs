@@ -1,0 +1,62 @@
+{
+  "name": "boidsjs",
+  "version": "0.1.0",
+  "description": "A highly customizable, lightweight library for boids simulations.",
+  "main": "./dist/boidsjs.umd.js",
+  "module": "./dist/boidsjs.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/boidsjs.mjs",
+      "require": "./dist/boidsjs.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./react": {
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.umd.js",
+      "types": "./dist/react/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && tsc",
+    "preview": "vite preview"
+  },
+  "keywords": [
+    "boids",
+    "simulation",
+    "particles",
+    "canvas",
+    "flocking",
+    "react",
+    "flow field"
+  ],
+  "author": "David Vogeleer",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "@types/stats.js": "^0.17.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "stats.js": "^0.17.0",
+    "typescript": "^5.2.2",
+    "vite": "^5.0.0",
+    "vite-plugin-dts": "^3.6.0"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    }
+  }
+}
