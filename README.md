@@ -13,15 +13,15 @@ A highly customizable, lightweight, and performance-oriented library for boids (
 ## Installation
 
 ```bash
-npm install boidsjs
+npm install @individual11/boidsjs
 # or
-yarn add boidsjs
+yarn add @individual11/boidsjs
 ```
 
 ## Basic Usage (Vanilla JS)
 
 ```javascript
-import { Engine } from 'boidsjs';
+import { Engine } from '@individual11/boidsjs';
 
 const canvas = document.getElementById('myCanvas');
 const engine = new Engine({
@@ -82,7 +82,7 @@ The `Engine` constructor accepts a wide range of options:
 We provide a dedicated React component for easy integration:
 
 ```tsx
-import { BoidsJS } from 'boidsjs/react';
+import { BoidsJS } from '@individual11/boidsjs/react';
 
 const MyComponent = () => (
   <BoidsJS 

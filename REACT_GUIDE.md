@@ -5,7 +5,7 @@ The `BoidsJS` component is the easiest way to add a boids simulation to your Rea
 ## Basic Usage
 
 ```tsx
-import { BoidsJS } from 'boidsjs/react';
+import { BoidsJS } from '@individual11/boidsjs/react';
 
 function App() {
   return (
