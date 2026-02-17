@@ -54,7 +54,7 @@ The `BoidsJS` component accepts the following props:
 | `showFlowField` | `boolean` | `false` | Visualize the underlying flow lines. |
 | `showNoiseBackground`| `boolean` | `false` | Visualize the underlying noise map. |
 | `flowFieldColor` | `string` | `"rgba(255,255,255,0.1)"` | Color of the flow lines. |
-| `noiseSpeed` | `number` | `0.005` | Evolution speed of the noise field. |
+| `noiseSpeed` | `number` | `0.003` | Evolution speed of the noise field. |
 
 ## Hooks & Callbacks
 | Prop | Type | Description |

@@ -58,7 +58,7 @@ export class Engine {
         this.options.color = options.color || '#22d3ee';
         this.options.showFlowField = options.showFlowField || false;
         this.options.showNoiseBackground = options.showNoiseBackground || false;
-        this.options.noiseSpeed = options.noiseSpeed || 0.005;
+        this.options.noiseSpeed = options.noiseSpeed || 0.003;
         this.options.flowFieldColor = options.flowFieldColor || 'rgba(255, 255, 255, 0.1)';
         this.options.mouseInteraction = options.mouseInteraction || 'none';
         this.options.mouseRadius = options.mouseRadius || 150;
@@ -71,8 +71,8 @@ export class Engine {
             separationWeight: 1.0,
         };
         this.options.flowFieldOptions = options.flowFieldOptions || {
-            scale: 0.005,
-            strength: 0.1,
+            scale: 0.003,
+            strength: 0.25,
         };
 
         this.setupEventListeners();
