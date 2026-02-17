@@ -1,6 +1,6 @@
 {
   "name": "@individual11/boidsjs",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A highly customizable, lightweight library for boids simulations.",
   "main": "./dist/boidsjs.js",
   "module": "./dist/boidsjs.mjs",
