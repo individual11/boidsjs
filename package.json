@@ -2,18 +2,18 @@
   "name": "@individual11/boidsjs",
   "version": "0.1.0",
   "description": "A highly customizable, lightweight library for boids simulations.",
-  "main": "./dist/boidsjs.umd.js",
+  "main": "./dist/boidsjs.js",
   "module": "./dist/boidsjs.mjs",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "import": "./dist/boidsjs.mjs",
-      "require": "./dist/boidsjs.umd.js",
+      "require": "./dist/boidsjs.js",
       "types": "./dist/index.d.ts"
     },
     "./react": {
       "import": "./dist/react/index.mjs",
-      "require": "./dist/react/index.umd.js",
+      "require": "./dist/react/index.js",
       "types": "./dist/react/index.d.ts"
     }
   },
@@ -38,6 +38,7 @@
   "author": "David Vogeleer",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^25.2.3",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/stats.js": "^0.17.4",
