@@ -18,7 +18,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "REACT_GUIDE.md"
   ],
   "scripts": {
     "dev": "vite",
