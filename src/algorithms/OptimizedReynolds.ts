@@ -6,16 +6,17 @@ export class OptimizedReynolds extends Reynolds {
     static flock(boid: Boid, neighbors: Boid[], options: ReynoldsOptions): void {
         const radiusSq = options.perceptionRadius * options.perceptionRadius;
 
-        const nearest = neighbors
-            .filter((other) => {
-                if (other === boid) {
-                    return false;
-                }
-                return boid.position.distSq(other.position) < radiusSq;
+        const neighborDistances = neighbors
+            .filter((other) => other !== boid)
+            .map((other) => {
+                const d2 = boid.position.distSq(other.position);
+                return { boid: other, d2 };
             })
-            .sort((a, b) => boid.position.distSq(a.position) - boid.position.distSq(b.position))
+            .filter((entry) => entry.d2 < radiusSq)
+            .sort((a, b) => a.d2 - b.d2)
             .slice(0, 7);
 
+        const nearest = neighborDistances.map((entry) => entry.boid);
         super.flock(boid, nearest, options);
     }
 }
