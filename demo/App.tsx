@@ -13,9 +13,9 @@ const DEFAULTS = {
     color: '#22d3ee',
     showFlowField: false,
     showNoiseBackground: false,
-    noiseScale: 0.005,
-    noiseSpeed: 0.005,
-    flowStrength: 0.1,
+    noiseScale: 0.003,
+    noiseSpeed: 0.003,
+    flowStrength: 0.25,
     flowColor: '#ffffff',
     flowOpacity: 0.1,
     mouseMode: 'none' as const,
@@ -69,9 +69,9 @@ export const App = () => {
     const [color, setColor] = useState('#22d3ee');
     const [showFlowField, setShowFlowField] = useState(false);
     const [showNoiseBackground, setShowNoiseBackground] = useState(false);
-    const [noiseScale, setNoiseScale] = useState(0.005);
-    const [noiseSpeed, setNoiseSpeed] = useState(0.005);
-    const [flowStrength, setFlowStrength] = useState(0.1);
+    const [noiseScale, setNoiseScale] = useState(0.003);
+    const [noiseSpeed, setNoiseSpeed] = useState(0.003);
+    const [flowStrength, setFlowStrength] = useState(0.25);
     const [flowColor, setFlowColor] = useState('#ffffff');
     const [flowOpacity, setFlowOpacity] = useState(0.1);
     const [mouseMode, setMouseMode] = useState<'none' | 'attract' | 'repulse'>('none');

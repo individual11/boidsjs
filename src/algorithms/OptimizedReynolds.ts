@@ -4,12 +4,19 @@ import { Reynolds, ReynoldsOptions } from './Reynolds';
 // based on Princeton study -> https://www.princeton.edu/news/2013/02/07/birds-feather-track-seven-neighbors-flock-together
 export class OptimizedReynolds extends Reynolds {
     static flock(boid: Boid, neighbors: Boid[], options: ReynoldsOptions): void {
-        // Only use the 6 nearest neighbors
-        const nearest = [...neighbors]
+        const radiusSq = options.perceptionRadius * options.perceptionRadius;
+
+        const neighborDistances = neighbors
             .filter((other) => other !== boid)
-            .sort((a, b) => boid.position.dist(a.position) - boid.position.dist(b.position))
+            .map((other) => {
+                const d2 = boid.position.distSq(other.position);
+                return { boid: other, d2 };
+            })
+            .filter((entry) => entry.d2 < radiusSq)
+            .sort((a, b) => a.d2 - b.d2)
             .slice(0, 7);
 
+        const nearest = neighborDistances.map((entry) => entry.boid);
         super.flock(boid, nearest, options);
     }
 }
