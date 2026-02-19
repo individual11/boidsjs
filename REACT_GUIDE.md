@@ -40,6 +40,8 @@ The `BoidsJS` component accepts the following props:
 | `maxSpeed` | `number` | `4` | Maximum speed of boids. |
 | `minSpeed` | `number` | `2` | Minimum speed of boids. |
 | `maxForce` | `number` | `0.1` | Steering force strength. |
+| `reynoldsOptions` | `object` | - | [Details below](#advanced-algorithm-options) |
+| `flowFieldOptions` | `object` | - | [Details below](#advanced-algorithm-options) |
 
 ### Interactions
 | Prop | Type | Default | Description |
@@ -60,6 +62,26 @@ The `BoidsJS` component accepts the following props:
 | Prop | Type | Description |
 | :--- | :--- | :--- |
 | `onFrame` | `() => void` | Callback executed on every animation frame. Useful for stats or external syncing. |
+
+## Advanced Algorithm Options
+
+### Reynolds Options (`reynoldsOptions`)
+Used when `algorithm` is `'reynolds'` or `'optimized'`.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `perceptionRadius` | `number` | `50` | Neighbor detection radius. |
+| `alignmentWeight` | `number` | `1.0` | Strength of speed matching. |
+| `cohesionWeight` | `number` | `1.0` | Strength of group centering. |
+| `separationWeight` | `number` | `1.0` | Strength of collision avoidance. |
+
+### Flow Field Options (`flowFieldOptions`)
+Used when `algorithm` is `'flow-field'`.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `scale` | `number` | `0.003` | Noise map zoom level. |
+| `strength` | `number` | `0.25` | Steering impact. |
 
 ## Example: Advanced Configuration
 

@@ -56,6 +56,8 @@ The `Engine` constructor accepts a wide range of options:
 | `maxSpeed` | `number` | `4` | Maximum velocity of a boid. |
 | `minSpeed` | `number` | `2` | Minimum velocity of a boid. |
 | `maxForce` | `number` | `0.1` | Stability/steering strength. |
+| `reynoldsOptions` | `object` | - | [See Reynolds Options](#reynolds-options) |
+| `flowFieldOptions` | `object` | - | [See Flow Field Options](#flow-field-options) |
 
 ### Interactions
 | Property | Type | Default | Description |
@@ -76,6 +78,20 @@ The `Engine` constructor accepts a wide range of options:
 | Property | Type | Description |
 | :--- | :--- | :--- |
 | `onFrame` | `() => void` | Callback executed on every animation frame. |
+
+### Reynolds Options
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `perceptionRadius` | `number` | `50` | Radius within which boids consider others as neighbors. |
+| `alignmentWeight` | `number` | `1.0` | How strongly boids try to match neighbor velocity. |
+| `cohesionWeight` | `number` | `1.0` | How strongly boids try to stay close to neighbors. |
+| `separationWeight` | `number` | `1.0` | How strongly boids try to avoid each other. |
+
+### Flow Field Options
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `scale` | `number` | `0.003` | Density of the flow field noise (lower = smoother). |
+| `strength` | `number` | `0.25` | How strongly the field affects boid velocity. |
 
 ## React Support
 
