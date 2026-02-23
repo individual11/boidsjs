@@ -7,14 +7,14 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/boidsjs.mjs",
-      "require": "./dist/boidsjs.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/boidsjs.js"
     },
     "./react": {
+      "types": "./dist/react/index.d.ts",
       "import": "./dist/react/index.mjs",
-      "require": "./dist/react/index.js",
-      "types": "./dist/react/index.d.ts"
+      "require": "./dist/react/index.js"
     }
   },
   "files": [
@@ -24,7 +24,10 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "boids",
@@ -38,16 +41,22 @@
   "author": "David Vogeleer",
   "license": "MIT",
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/node": "^25.2.3",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/stats.js": "^0.17.4",
+    "@types/testing-library__jest-dom": "^5.14.9",
+    "@vitest/coverage-v8": "^4.0.18",
+    "jsdom": "^28.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "stats.js": "^0.17.0",
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
-    "vite-plugin-dts": "^3.6.0"
+    "vite-plugin-dts": "^3.6.0",
+    "vitest": "^4.0.18"
   },
   "peerDependencies": {
     "react": ">=16.8.0",
