@@ -2,7 +2,10 @@
   "name": "@individual11/boidsjs",
   "version": "0.1.3",
   "description": "A highly customizable, lightweight library for boids simulations.",
-  "repository": "https://github.com/individual11/boidsjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/individual11/boidsjs.git"
+  },
   "main": "./dist/boidsjs.js",
   "module": "./dist/boidsjs.mjs",
   "types": "./dist/index.d.ts",
