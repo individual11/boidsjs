@@ -93,6 +93,10 @@ The `Engine` constructor accepts a wide range of options:
 | `scale` | `number` | `0.003` | Density of the flow field noise (lower = smoother). |
 | `strength` | `number` | `0.25` | How strongly the field affects boid velocity. |
 
+## Roadmap
+
+Curious about what's coming next? Check out our [Roadmap](./ROADMAP.md) for planned features like Spatial Hashing optimizations and new steering behaviors.
+
 ## React Support
 
 We provide a dedicated React component for easy integration:
