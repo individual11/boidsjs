@@ -124,6 +124,7 @@ export class Engine {
             const predOpts = this.options.predatorOptions!;
             const pred = this.createBoid(predOpts.color!);
             pred.maxSpeed = predOpts.speed!;
+            pred.minSpeed = Math.min(pred.minSpeed, pred.maxSpeed);
             pred.size = predOpts.size!;
             this.predators.push(pred);
         }
