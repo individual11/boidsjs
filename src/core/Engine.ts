@@ -202,13 +202,17 @@ export class Engine {
     render() {
         this.renderer.clear(this.options.width, this.options.height);
 
+        // Apply the same timeShift used in FlowField.apply() so the visual
+        // overlays sample the same noise slice that boids are actually following.
+        const effectiveZ = this.noiseZ * (this.options.flowFieldOptions!.timeShift ?? 1);
+
         if (this.options.showNoiseBackground) {
             this.renderer.drawNoiseBackground(
                 this.options.width,
                 this.options.height,
                 this.noise,
                 this.options.flowFieldOptions!.scale,
-                this.noiseZ
+                effectiveZ
             );
         }
 
@@ -218,7 +222,7 @@ export class Engine {
                 this.options.height,
                 this.noise,
                 this.options.flowFieldOptions!.scale,
-                this.noiseZ,
+                effectiveZ,
                 this.options.flowFieldColor!
             );
         }
