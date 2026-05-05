@@ -75,6 +75,51 @@ describe('Engine', () => {
         expect(engine.options.boidSize).toBe(10);
     });
 
+    it('should apply custom predatorOptions to predator boids', () => {
+        const engine = new Engine({
+            canvas: mockCanvas,
+            width: 800,
+            height: 600,
+            boidCount: 5,
+            predatorCount: 2,
+            predatorOptions: {
+                color: '#00ff00',
+                speed: 6,
+                size: 12,
+                fleeRadius: 200,
+            },
+        });
+
+        expect(engine.predators.length).toBe(2);
+        for (const pred of engine.predators) {
+            expect(pred.color).toBe('#00ff00');
+            expect(pred.maxSpeed).toBe(6);
+            expect(pred.size).toBe(12);
+        }
+        expect(engine.options.predatorOptions!.fleeRadius).toBe(200);
+    });
+
+    it('should apply default predatorOptions when none are provided', () => {
+        const engine = new Engine({
+            canvas: mockCanvas,
+            width: 800,
+            height: 600,
+            boidCount: 5,
+            predatorCount: 1,
+        });
+
+        const predOpts = engine.options.predatorOptions!;
+        expect(predOpts.color).toBe('#ef4444');
+        expect(predOpts.speed).toBe(3);
+        expect(predOpts.size).toBe(7.5);
+        expect(predOpts.fleeRadius).toBe(100);
+
+        const pred = engine.predators[0];
+        expect(pred.color).toBe('#ef4444');
+        expect(pred.maxSpeed).toBe(3);
+        expect(pred.size).toBe(7.5);
+    });
+
     it('should update boid positions when update() is called', () => {
         const engine = new Engine({
             canvas: mockCanvas,

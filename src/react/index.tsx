@@ -25,6 +25,7 @@ export const BoidsJS: React.FC<BoidsJSProps> = ({
     mouseInteraction = 'none',
     mouseRadius = 150,
     predatorCount = 0,
+    predatorOptions,
     reynoldsOptions,
     flowFieldOptions,
     flowFieldColor = 'rgba(255, 255, 255, 0.1)',
@@ -53,6 +54,7 @@ export const BoidsJS: React.FC<BoidsJSProps> = ({
                 mouseInteraction,
                 mouseRadius,
                 predatorCount,
+                predatorOptions,
                 reynoldsOptions,
                 flowFieldOptions,
                 flowFieldColor,
@@ -90,10 +92,16 @@ export const BoidsJS: React.FC<BoidsJSProps> = ({
 
             if (e.boids.length !== boidCount || e.predators.length !== predatorCount) {
                 e.options.predatorCount = predatorCount;
+                if (predatorOptions) {
+                    e.options.predatorOptions = { ...e.options.predatorOptions, ...predatorOptions };
+                }
                 e.init();
+            } else if (predatorOptions) {
+                // Update predator options live (affects next init or flee radius immediately)
+                e.options.predatorOptions = { ...e.options.predatorOptions, ...predatorOptions };
             }
         }
-    }, [boidCount, algorithm, shape, boidSize, maxSpeed, minSpeed, maxForce, color, showFlowField, showNoiseBackground, noiseSpeed, flowFieldColor, mouseInteraction, mouseRadius, predatorCount, reynoldsOptions, flowFieldOptions]);
+    }, [boidCount, algorithm, shape, boidSize, maxSpeed, minSpeed, maxForce, color, showFlowField, showNoiseBackground, noiseSpeed, flowFieldColor, mouseInteraction, mouseRadius, predatorCount, predatorOptions, reynoldsOptions, flowFieldOptions]);
 
     useEffect(() => {
         if (engineRef.current) {

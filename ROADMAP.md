@@ -11,9 +11,9 @@ Welcome to the `boidsJS` roadmap! This document outlines what we're currently wo
 - [x] Showcase and documentation website
 - [x] Community guidelines (Contributing, Code of Conduct, Issue Templates)
 
-## Up Next (v0.2.x)
-- **Configurable Predator Logic**: Allow passing in properties for controlling predators (e.g. speed, size, etc.)
-- **Advanced Flow Fields**: Support for time-based shifting flow fields and custom field mathematical functions.
+## Current Focus (v0.2.x)
+- [x] **Configurable Predator Logic**: Expose predator properties (color, speed, size, fleeRadius) as first-class config options via `predatorOptions`.
+- [x] **Advanced Flow Fields**: Added `timeShift` to `FlowFieldOptions` for controlling how fast the field evolves over time.
 
 ## Up Next (v0.3.x)
 - **Custom Boid Renderers**: Allow custom renderers for boids (e.g. images (maybe), SVGs, etc.)

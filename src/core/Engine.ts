@@ -10,6 +10,19 @@ import { Noise } from './Noise';
 export type AlgorithmType = 'reynolds' | 'flow-field' | 'optimized';
 export type InteractionMode = 'repulse' | 'attract' | 'none';
 
+export interface PredatorOptions {
+    /** Color of the predators. @default '#ef4444' */
+    color?: string;
+    /** Absolute max speed of predators. @default 3 */
+    speed?: number;
+    /** Absolute size of predators in pixels. @default 7.5 */
+    size?: number;
+    /** Radius within which boids will flee from a predator. @default 100 */
+    fleeRadius?: number;
+    /** Visual shape of the predators. @default 'triangle' */
+    shape?: ShapeType;
+}
+
 export interface EngineOptions {
     canvas: HTMLCanvasElement;
     width: number;
@@ -31,6 +44,7 @@ export interface EngineOptions {
     mouseInteraction?: InteractionMode;
     mouseRadius?: number;
     predatorCount?: number;
+    predatorOptions?: PredatorOptions;
     onFrame?: () => void;
 }
 
@@ -63,6 +77,13 @@ export class Engine {
         this.options.mouseInteraction = options.mouseInteraction ?? 'none';
         this.options.mouseRadius = options.mouseRadius ?? 150;
         this.options.predatorCount = options.predatorCount ?? 0;
+        this.options.predatorOptions = {
+            color: options.predatorOptions?.color ?? '#ef4444',
+            speed: options.predatorOptions?.speed ?? 3,
+            size: options.predatorOptions?.size ?? 7.5,
+            fleeRadius: options.predatorOptions?.fleeRadius ?? 100,
+            shape: options.predatorOptions?.shape ?? 'triangle',
+        };
 
         this.options.reynoldsOptions = options.reynoldsOptions || {
             perceptionRadius: 50,
@@ -100,9 +121,10 @@ export class Engine {
 
         this.predators = [];
         for (let i = 0; i < this.options.predatorCount!; i++) {
-            const pred = this.createBoid('#ef4444');
-            pred.maxSpeed *= 0.8; // Predators are a bit slower but persistent
-            pred.size *= 1.5;
+            const predOpts = this.options.predatorOptions!;
+            const pred = this.createBoid(predOpts.color!);
+            pred.maxSpeed = predOpts.speed!;
+            pred.size = predOpts.size!;
             this.predators.push(pred);
         }
     }
@@ -140,7 +162,7 @@ export class Engine {
 
             // Predator interactions
             if (this.predators.length > 0) {
-                Interactions.flee(boid, this.predators, 100);
+                Interactions.flee(boid, this.predators, this.options.predatorOptions!.fleeRadius!);
             }
 
             boid.edges(this.options.width, this.options.height);
@@ -164,6 +186,12 @@ export class Engine {
             Reynolds.separation(pred, this.predators, 50).mult(2);
 
             pred.edges(this.options.width, this.options.height);
+
+            // Keep predators updated with current predatorOptions (mirrors boid sync above)
+            pred.maxSpeed = this.options.predatorOptions!.speed!;
+            pred.size = this.options.predatorOptions!.size!;
+            pred.color = this.options.predatorOptions!.color!;
+
             pred.update();
         }
 
@@ -199,7 +227,7 @@ export class Engine {
         }
 
         for (const pred of this.predators) {
-            this.renderer.drawBoid(pred, this.options.shape);
+            this.renderer.drawBoid(pred, this.options.predatorOptions!.shape);
         }
     }
 
