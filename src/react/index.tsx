@@ -83,22 +83,30 @@ export const BoidsJS: React.FC<BoidsJSProps> = ({
             e.options.minSpeed = minSpeed;
             e.options.flowFieldColor = flowFieldColor;
 
-            if (reynoldsOptions) {
-                e.options.reynoldsOptions = { ...e.options.reynoldsOptions, ...reynoldsOptions };
-            }
-            if (flowFieldOptions) {
-                e.options.flowFieldOptions = { ...e.options.flowFieldOptions, ...flowFieldOptions };
-            }
+            e.options.reynoldsOptions = {
+                perceptionRadius: reynoldsOptions?.perceptionRadius ?? 50,
+                alignmentWeight: reynoldsOptions?.alignmentWeight ?? 1.0,
+                cohesionWeight: reynoldsOptions?.cohesionWeight ?? 1.0,
+                separationWeight: reynoldsOptions?.separationWeight ?? 1.0,
+            };
+
+            e.options.flowFieldOptions = {
+                scale: flowFieldOptions?.scale ?? 0.003,
+                strength: flowFieldOptions?.strength ?? 0.25,
+                timeShift: flowFieldOptions?.timeShift ?? 1,
+            };
+
+            e.options.predatorOptions = {
+                color: predatorOptions?.color ?? '#ef4444',
+                speed: predatorOptions?.speed ?? 3,
+                size: predatorOptions?.size ?? 7.5,
+                fleeRadius: predatorOptions?.fleeRadius ?? 100,
+                shape: predatorOptions?.shape ?? 'triangle',
+            };
 
             if (e.boids.length !== boidCount || e.predators.length !== predatorCount) {
                 e.options.predatorCount = predatorCount;
-                if (predatorOptions) {
-                    e.options.predatorOptions = { ...e.options.predatorOptions, ...predatorOptions };
-                }
                 e.init();
-            } else if (predatorOptions) {
-                // Update predator options live (affects next init or flee radius immediately)
-                e.options.predatorOptions = { ...e.options.predatorOptions, ...predatorOptions };
             }
         }
     }, [boidCount, algorithm, shape, boidSize, maxSpeed, minSpeed, maxForce, color, showFlowField, showNoiseBackground, noiseSpeed, flowFieldColor, mouseInteraction, mouseRadius, predatorCount, predatorOptions, reynoldsOptions, flowFieldOptions]);
