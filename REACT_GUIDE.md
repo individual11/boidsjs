@@ -49,6 +49,7 @@ The `BoidsJS` component accepts the following props:
 | `mouseInteraction` | `'none' \| 'attract' \| 'repulse'` | `'none'` | Mouse interaction mode. |
 | `mouseRadius` | `number` | `150` | Influence radius for mouse interaction. |
 | `predatorCount` | `number` | `0` | Number of specialized "predator" boids. |
+| `predatorOptions` | `object` | - | [Details below](#predator-options-predatoroptions) |
 
 ### Visual Aids (Flow Field)
 | Prop | Type | Default | Description |
@@ -82,6 +83,18 @@ Used when `algorithm` is `'flow-field'`.
 | :--- | :--- | :--- | :--- |
 | `scale` | `number` | `0.003` | Noise map zoom level. |
 | `strength` | `number` | `0.25` | Steering impact. |
+| `timeShift` | `number` | `1` | Multiplier on the time dimension of the noise sample. Higher values make the field evolve faster. |
+
+### Predator Options (`predatorOptions`)
+Used to configure the behavior and appearance of predators.
+
+| Prop | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `color` | `string` | `"#ef4444"` | Color of the predator boids. |
+| `speed` | `number` | `3` | Absolute max speed of predators in pixels/frame. |
+| `size` | `number` | `7.5` | Absolute size of predators in pixels. |
+| `fleeRadius` | `number` | `100` | Radius within which boids will flee from a predator. |
+| `shape` | `'triangle' \| 'circle' \| 'line'` | `'triangle'` | Visual shape of the predators. |
 
 ## Example: Advanced Configuration
 
