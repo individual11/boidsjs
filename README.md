@@ -65,6 +65,16 @@ The `Engine` constructor accepts a wide range of options:
 | `mouseInteraction` | `'none' \| 'attract' \| 'repulse'` | `'none'` | Mouse interaction mode. |
 | `mouseRadius` | `number` | `150` | Influence radius for mouse interaction. |
 | `predatorCount`| `number` | `0` | Number of predators to avoid. |
+| `predatorOptions` | `PredatorOptions` | - | [See Predator Options](#predator-options) |
+
+### Predator Options
+| Property | Type | Default | Description |
+| :--- | :--- | :--- | :--- |
+| `color` | `string` | `"#ef4444"` | Color of the predator boids. |
+| `speed` | `number` | `3` | Absolute max speed of predators in pixels/frame. |
+| `size` | `number` | `7.5` | Absolute size of predators in pixels. |
+| `fleeRadius` | `number` | `100` | Radius within which boids will flee from a predator. |
+| `shape` | `'triangle' \| 'circle' \| 'line'` | `'triangle'` | Visual shape of the predators. |
 
 ### Visual Aids (Flow Field)
 | Property | Type | Default | Description |
@@ -92,6 +102,7 @@ The `Engine` constructor accepts a wide range of options:
 | :--- | :--- | :--- | :--- |
 | `scale` | `number` | `0.003` | Density of the flow field noise (lower = smoother). |
 | `strength` | `number` | `0.25` | How strongly the field affects boid velocity. |
+| `timeShift` | `number` | `1` | Multiplier on the time dimension of the noise sample. Higher values make the field evolve faster. |
 
 ## Roadmap
 

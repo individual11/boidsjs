@@ -18,8 +18,14 @@ const DEFAULTS = {
     flowStrength: 0.25,
     flowColor: '#ffffff',
     flowOpacity: 0.1,
+    timeShift: 1,
     mouseMode: 'none' as const,
     predators: 0,
+    predatorColor: '#ef4444',
+    predatorSpeed: 3,
+    predatorSize: 7.5,
+    predatorFleeRadius: 100,
+    predatorShape: 'triangle' as const,
     sep: 1.0,
     align: 1.0,
     coh: 1.0,
@@ -76,12 +82,20 @@ export const App = () => {
     const [flowOpacity, setFlowOpacity] = useState(0.1);
     const [mouseMode, setMouseMode] = useState<'none' | 'attract' | 'repulse'>('none');
     const [predators, setPredators] = useState(0);
+    const [predatorColor, setPredatorColor] = useState('#ef4444');
+    const [predatorSpeed, setPredatorSpeed] = useState(3);
+    const [predatorSize, setPredatorSize] = useState(7.5);
+    const [predatorFleeRadius, setPredatorFleeRadius] = useState(100);
+    const [predatorShape, setPredatorShape] = useState<'triangle' | 'circle' | 'line'>('triangle');
 
     // Reynolds options
     const [sep, setSep] = useState(1.0);
     const [align, setAlign] = useState(1.0);
     const [coh, setCoh] = useState(1.0);
     const [radius, setRadius] = useState(50);
+
+    // Flow field options
+    const [timeShift, setTimeShift] = useState(1);
 
     const handleReset = () => {
         setCount(DEFAULTS.count);
@@ -99,8 +113,14 @@ export const App = () => {
         setFlowStrength(DEFAULTS.flowStrength);
         setFlowColor(DEFAULTS.flowColor);
         setFlowOpacity(DEFAULTS.flowOpacity);
+        setTimeShift(DEFAULTS.timeShift);
         setMouseMode(DEFAULTS.mouseMode);
         setPredators(DEFAULTS.predators);
+        setPredatorColor(DEFAULTS.predatorColor);
+        setPredatorSpeed(DEFAULTS.predatorSpeed);
+        setPredatorSize(DEFAULTS.predatorSize);
+        setPredatorFleeRadius(DEFAULTS.predatorFleeRadius);
+        setPredatorShape(DEFAULTS.predatorShape);
         setSep(DEFAULTS.sep);
         setAlign(DEFAULTS.align);
         setCoh(DEFAULTS.coh);
@@ -156,10 +176,18 @@ export const App = () => {
                 flowFieldColor={hexToRgba(flowColor, flowOpacity)}
                 mouseInteraction={mouseMode}
                 predatorCount={predators}
+                predatorOptions={{
+                    color: predatorColor,
+                    speed: predatorSpeed,
+                    size: predatorSize,
+                    fleeRadius: predatorFleeRadius,
+                    shape: predatorShape,
+                }}
                 onFrame={() => stats.update()}
                 flowFieldOptions={{
                     scale: noiseScale,
-                    strength: flowStrength
+                    strength: flowStrength,
+                    timeShift: timeShift,
                 }}
                 reynoldsOptions={{
                     separationWeight: sep,
@@ -202,8 +230,26 @@ export const App = () => {
                         <label>Perception: {radius} <input type="range" min="10" max="200" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={radius} onChange={(e) => setRadius(parseInt(e.target.value))} /></label>
                     </Accordion>
 
+                    <Accordion title="Predators">
+                        <label>Count: {predators} <input type="range" min="0" max="10" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={predators} onChange={(e) => setPredators(parseInt(e.target.value))} /></label>
+                        {predators > 0 && (
+                            <>
+                                <label>Color: <input type="color" style={{ width: '100%', height: '24px', border: 'none', background: 'none' }} value={predatorColor} onChange={(e) => setPredatorColor(e.target.value)} /></label>
+                                <label>Speed: {predatorSpeed.toFixed(1)} <input type="range" min="0.5" max="15" step="0.5" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={predatorSpeed} onChange={(e) => setPredatorSpeed(parseFloat(e.target.value))} /></label>
+                                <label>Size: {predatorSize.toFixed(1)} <input type="range" min="1" max="30" step="0.5" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={predatorSize} onChange={(e) => setPredatorSize(parseFloat(e.target.value))} /></label>
+                                <label>Flee Radius: {predatorFleeRadius} <input type="range" min="20" max="300" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={predatorFleeRadius} onChange={(e) => setPredatorFleeRadius(parseInt(e.target.value))} /></label>
+                                <label>Shape:
+                                    <select style={{ width: '100%', background: '#334155', color: 'white', border: 'none', padding: '4px', fontSize: '0.8rem', borderRadius: '4px' }} value={predatorShape} onChange={(e) => setPredatorShape(e.target.value as any)}>
+                                        <option value="triangle">Triangle</option>
+                                        <option value="circle">Circle</option>
+                                        <option value="line">Line</option>
+                                    </select>
+                                </label>
+                            </>
+                        )}
+                    </Accordion>
+
                     <Accordion title="Environment">
-                        <label>Predators: {predators} <input type="range" min="0" max="10" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={predators} onChange={(e) => setPredators(parseInt(e.target.value))} /></label>
                         <label>Mouse Interaction:
                             <select style={{ width: '100%', background: '#334155', color: 'white', border: 'none', padding: '4px', fontSize: '0.8rem', borderRadius: '4px' }} value={mouseMode} onChange={(e) => setMouseMode(e.target.value as any)}>
                                 <option value="none">None</option>
@@ -239,6 +285,7 @@ export const App = () => {
                                     <input type="checkbox" checked={showFlowField} onChange={(e) => setShowFlowField(e.target.checked)} /> Show Flow Lines
                                 </label>
                             </div>
+                            <label>Time Shift: {timeShift.toFixed(1)} <input type="range" min="0.1" max="10" step="0.1" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={timeShift} onChange={(e) => setTimeShift(parseFloat(e.target.value))} /></label>
                             {showFlowField && (
                                 <>
                                     <label>Scale: {noiseScale.toFixed(4)} <input type="range" min="0.0001" max="0.05" step="0.0001" style={{ width: '100%', height: '12px', margin: '2px 0' }} value={noiseScale} onChange={(e) => setNoiseScale(parseFloat(e.target.value))} /></label>
